@@ -1,26 +1,22 @@
 <template>
-    <require from='../components/probability-chart'></require>
-
     <div class="main-container">
         <div class="row attack-type-row">
-            <div class="col-xs-6 attack-type-button-col">
-                <button class="btn btn-default attack-type-button ${(attack_type == 'melee') ? 'attack-type-selected' : ''}"
-                        data-toggle="tooltip"
-                        title="Melee Attack"
-                        click.delegate="selectAttackType('melee')">
-                    <img class="img-icon" src="images/melee.png" />
-                </button>
-            </div>
-            <div class="col-xs-6 attack-type-button-col">
-                <button class="btn btn-default attack-type-button attack-type-button-range ${(attack_type == 'range') ? 'attack-type-selected' : ''}"
-                        data-toggle="tooltip"
-                        title="Ranged Attack"
-                        click.delegate="selectAttackType('range')">
-                    ${range}
-                    <img class="img-icon" src="images/ranged.png" />
-                </button>
+            <div class="col-xs-12 attack-type-button-col">
+                <h4>Select a range of Accuracy below from 0 to 12.</h4>
             </div>
         </div>
+        <div class="row attack-type-row">
+            <div class="col-xs-6 attack-type-button-col">
+                <label for="rangeStart">Minimum Range</label>
+                <input id = "rangeStart" type = "text" value.two-way = "rangeStart" change.delegate="checkRange('start')">
+            </div>
+            <div class="col-xs-6 attack-type-button-col">
+                <label for="rangeEnd">Maximum Range</label>
+                <input id = "rangeEnd" type = "text" value.two-way = "rangeEnd" change.delegate="checkRange('end')">
+
+            </div>
+        </div>
+
         <div class="row dice-button-row">
             <span class="dice-button-span">
                 <button class="btn dice-button dice-button-red dice-button-dark" 
@@ -181,6 +177,5 @@
                 </button>
             </span>
         </div>
-        <probability-chart title="% Chance to do at least X Damage" x-label="Total damage" probability-chart.ref="probabilityChart"/>
     </div>
 </template>

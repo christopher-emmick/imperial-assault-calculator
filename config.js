@@ -23,6 +23,7 @@ System.config({
     "aurelia-framework": "github:aurelia/framework@0.13.0",
     "aurelia-http-client": "github:aurelia/http-client@0.10.0",
     "aurelia-router": "github:aurelia/router@0.10.0",
+    "aurelia-table": "github:tochoromero/aurelia-table@0.1.11",
     "babel": "npm:babel-core@5.6.15",
     "babel-runtime": "npm:babel-runtime@5.6.15",
     "bootstrap": "github:twbs/bootstrap@3.3.4",

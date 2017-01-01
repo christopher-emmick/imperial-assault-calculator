@@ -17,8 +17,9 @@ var SurgeAttackProperty = (function (_super) {
     __extends(SurgeAttackProperty, _super);
     function SurgeAttackProperty(surgeCost) {
         if (surgeCost === void 0) { surgeCost = 1; }
-        _super.call(this);
-        this.surgeCost = surgeCost;
+        var _this = _super.call(this) || this;
+        _this.surgeCost = surgeCost;
+        return _this;
     }
     return SurgeAttackProperty;
 }(AttackProperty));
@@ -26,8 +27,9 @@ exports.SurgeAttackProperty = SurgeAttackProperty;
 var FixedAttackProperty = (function (_super) {
     __extends(FixedAttackProperty, _super);
     function FixedAttackProperty() {
-        _super.apply(this, arguments);
-        this.surge = 0;
+        var _this = _super.apply(this, arguments) || this;
+        _this.surge = 0;
+        return _this;
     }
     return FixedAttackProperty;
 }(AttackProperty));

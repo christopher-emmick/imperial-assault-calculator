@@ -1,6 +1,6 @@
 "use strict";
-require('jquery');
-var fastclick_1 = require('fastclick');
+require("jquery");
+var fastclick_1 = require("fastclick");
 var App = (function () {
     function App() {
     }
@@ -9,6 +9,7 @@ var App = (function () {
         config.map([
             { route: ['', 'attack-calc'], name: 'attack-calc', moduleId: 'pages/attack-calc', nav: true, title: 'Attack' },
             { route: 'attribute-test', name: 'attribute-test', moduleId: 'pages/attribute-test', nav: true, title: 'Attribute Test' },
+            { route: 'attack-range', name: 'attack-range', moduleId: 'pages/attack-range', nav: true, title: 'Attack (Multiple Ranges)' }
         ]);
         this.router = router;
     };

@@ -4,45 +4,45 @@ require("bootstrap/css/bootstrap.css!");
 var PossibleRolls_1 = require("../util/PossibleRolls");
 var AttackProperty_1 = require("../util/AttackProperty");
 var Dice_1 = require("../util/Dice");
-require("Chart.js");
 require("jquery");
-var AttackCalc = (function () {
-    function AttackCalc() {
+var AttackRangeCalc = (function () {
+    function AttackRangeCalc() {
         this.diceCount = new Dice_1.Dice();
         this.resetAttackDice();
         this.resetDefenseDice();
         this.surgeAbilities = [];
-        this.attack_type = "melee";
-        this.range = 0;
+        this.rangeStart = 0;
+        this.rangeEnd = 4;
     }
-    AttackCalc.prototype.attached = function () {
+    AttackRangeCalc.prototype.attached = function () {
         $('[data-toggle="tooltip"]').tooltip({ container: "body", delay: { show: 500 } });
     };
-    AttackCalc.prototype.selectAttackType = function (type) {
-        this.attack_type = type;
-        if (type == "melee") {
-            this.range = 0;
-        }
-        else if (type == "range") {
-            this.range++;
+    AttackRangeCalc.prototype.checkRange = function (rangeType) {
+        if (this.rangeStart < 0 || this.rangeEnd > 12 || this.rangeStart > this.rangeEnd) {
+            if (rangeType == 'start') {
+                this.rangeStart = 0;
+            }
+            else if (rangeType == 'end') {
+                this.rangeEnd = 4;
+            }
         }
     };
-    AttackCalc.prototype.addAttackProperty = function (surge, type) {
+    AttackRangeCalc.prototype.addAttackProperty = function (surge, type) {
         surge[type]++;
     };
-    AttackCalc.prototype.addDie = function (type) {
+    AttackRangeCalc.prototype.addDie = function (type) {
         this.diceCount[type]++;
     };
-    AttackCalc.prototype.addDefenseProperty = function (type) {
+    AttackRangeCalc.prototype.addDefenseProperty = function (type) {
         this.fixedDefenseAbility[type]++;
     };
-    AttackCalc.prototype.addNewSurge = function (surgeCost) {
+    AttackRangeCalc.prototype.addNewSurge = function (surgeCost) {
         this.surgeAbilities.push(new AttackProperty_1.SurgeAttackProperty(surgeCost));
     };
-    AttackCalc.prototype.removeSurge = function (surge) {
+    AttackRangeCalc.prototype.removeSurge = function (surge) {
         this.surgeAbilities = this.surgeAbilities.filter(function (p) { return p != surge; });
     };
-    AttackCalc.prototype.resetAttackDice = function () {
+    AttackRangeCalc.prototype.resetAttackDice = function () {
         this.diceCount.red = 0;
         this.diceCount.blue = 0;
         this.diceCount.green = 0;
@@ -54,7 +54,7 @@ var AttackCalc = (function () {
             surge: 0
         };
     };
-    AttackCalc.prototype.resetDefenseDice = function () {
+    AttackRangeCalc.prototype.resetDefenseDice = function () {
         this.diceCount.black = 0;
         this.diceCount.white = 0;
         this.fixedDefenseAbility = {
@@ -62,14 +62,15 @@ var AttackCalc = (function () {
             evade: 0
         };
     };
-    AttackCalc.prototype.calculateResult = function () {
+    AttackRangeCalc.prototype.calculateResult = function () {
         var possibleRolls = new PossibleRolls_1.PossibleRolls();
         possibleRolls.applyAllRolls(this.diceCount);
         //possibleRolls.showProb();
-        var damageResults = possibleRolls.getEffectiveDamage(this.surgeAbilities, this.fixedAttackAbility, this.fixedDefenseAbility, this.range);
-        this.probabilityChart.addChartData(damageResults);
+        var damageResults = possibleRolls.getEffectiveDamage(this.surgeAbilities, this.fixedAttackAbility, this.fixedDefenseAbility, 0);
+        console.log(damageResults);
+        //this.probabilityChart.addChartData(damageResults);
     };
-    return AttackCalc;
+    return AttackRangeCalc;
 }());
-exports.AttackCalc = AttackCalc;
-//# sourceMappingURL=attack-calc.js.map
+exports.AttackRangeCalc = AttackRangeCalc;
+//# sourceMappingURL=attack-range.js.map

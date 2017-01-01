@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var aurelia_framework_1 = require('aurelia-framework');
-var aurelia_dependency_injection_1 = require('aurelia-dependency-injection');
-require('jquery');
+var aurelia_framework_1 = require("aurelia-framework");
+var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
+require("jquery");
 var ProbabilityChart = (function () {
     function ProbabilityChart(element) {
         this._maxDatasets = 8;
@@ -154,20 +154,20 @@ var ProbabilityChart = (function () {
         }
         this.refreshChart();
     };
-    __decorate([
-        aurelia_framework_1.bindable, 
-        __metadata('design:type', String)
-    ], ProbabilityChart.prototype, "title", void 0);
-    __decorate([
-        aurelia_framework_1.bindable, 
-        __metadata('design:type', String)
-    ], ProbabilityChart.prototype, "xLabel", void 0);
-    ProbabilityChart = __decorate([
-        __param(0, aurelia_dependency_injection_1.inject), 
-        __metadata('design:paramtypes', [Element])
-    ], ProbabilityChart);
     return ProbabilityChart;
 }());
+__decorate([
+    aurelia_framework_1.bindable,
+    __metadata("design:type", String)
+], ProbabilityChart.prototype, "title", void 0);
+__decorate([
+    aurelia_framework_1.bindable,
+    __metadata("design:type", String)
+], ProbabilityChart.prototype, "xLabel", void 0);
+ProbabilityChart = __decorate([
+    __param(0, aurelia_dependency_injection_1.inject),
+    __metadata("design:paramtypes", [Element])
+], ProbabilityChart);
 exports.ProbabilityChart = ProbabilityChart;
 var LegendInfo = (function () {
     function LegendInfo() {
