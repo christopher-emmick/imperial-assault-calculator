@@ -57,6 +57,8 @@ var AttackCalc = (function () {
     AttackCalc.prototype.resetDefenseDice = function () {
         this.diceCount.black = 0;
         this.diceCount.white = 0;
+        this.diceCount.black_reroll_3B = 0;
+        this.diceCount.black_reroll_3B_2B = 0;
         this.fixedDefenseAbility = {
             block: 0,
             evade: 0
@@ -65,7 +67,7 @@ var AttackCalc = (function () {
     AttackCalc.prototype.calculateResult = function () {
         var possibleRolls = new PossibleRolls_1.PossibleRolls();
         possibleRolls.applyAllRolls(this.diceCount);
-        //possibleRolls.showProb();
+        possibleRolls.showProb();
         var damageResults = possibleRolls.getEffectiveDamage(this.surgeAbilities, this.fixedAttackAbility, this.fixedDefenseAbility, this.range);
         this.probabilityChart.addChartData(damageResults);
     };

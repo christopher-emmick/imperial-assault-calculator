@@ -45,6 +45,32 @@ var PossibleRolls = (function () {
                 new RollResult_1.RollResult(0, 0, 0, 0, 1, false, 1 / 6),
                 new RollResult_1.RollResult(0, 0, 0, 1, 1, false, 2 / 6),
                 new RollResult_1.RollResult(0, 0, 0, 0, 0, true, 1 / 6)
+            ],
+            black_reroll_3B: [
+                new RollResult_1.RollResult(0, 0, 0, 1, 0, false, (2 / 6) + ((1 / 6) * (2 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 2, 0, false, (2 / 6) + ((1 / 6) * (2 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 3, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 0, 1, false, (1 / 6) + ((1 / 6) * (1 / 6)))
+            ],
+            black_reroll_3B_2B: [
+                new RollResult_1.RollResult(0, 0, 0, 1, 0, false, (2 / 6) + ((1 / 2) * (2 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 2, 0, false, ((1 / 2) * (2 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 3, 0, false, ((1 / 2) * (1 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 0, 1, false, (1 / 6) + ((1 / 2) * (1 / 6)))
+            ],
+            white_reroll_D: [
+                new RollResult_1.RollResult(0, 0, 0, 0, 0, false, (1 / 6) + ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 1, 0, false, (1 / 6) + ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 0, 1, false, (1 / 6) + ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 1, 1, false, (2 / 6) + ((1 / 6) * (2 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 0, 0, true, ((1 / 6) * (1 / 6)))
+            ],
+            white_reroll_D_1B1E: [
+                new RollResult_1.RollResult(0, 0, 0, 0, 0, false, (1 / 6) + ((1 / 2) * (1 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 1, 0, false, (1 / 6) + ((1 / 2) * (1 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 0, 1, false, (1 / 6) + ((1 / 2) * (1 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 1, 1, false, 0 + ((1 / 2) * (2 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 0, 0, true, 0 + ((1 / 2) * (1 / 6)))
             ]
         };
         this._possibleRolls = {};

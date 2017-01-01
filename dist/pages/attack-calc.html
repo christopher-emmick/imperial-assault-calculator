@@ -162,6 +162,18 @@
                     +${fixedDefenseAbility.evade}
                     <img class="img-icon-defense" src="images/evade.png" />
                 </button>
+                <button class="btn btn-default dice-button-black dice-button-dark"
+                        data-toggle="tooltip"
+                        title="Reroll Black Dice"
+                        click.delegate="addDie('black_reroll_3B')">
+                    Reroll Black 3B ${diceCount.black_reroll_3B}
+                </button>
+                <button class="btn btn-default dice-button-white dice-button-light"
+                        data-toggle="tooltip"
+                        title="Reroll White Dice"
+                        click.delegate="addDie('black_reroll_3B_2B')">
+                    Reroll Black 3B 2B ${diceCount.black_reroll_3B_2B}
+                </button>
                 <button class="btn btn-default button-cancel"
                         data-toggle="tooltip"
                         title="Clear Defense Values"

@@ -78,6 +78,8 @@ export class AttackCalc {
     resetDefenseDice() {
         this.diceCount.black = 0;
         this.diceCount.white = 0;
+        this.diceCount.black_reroll_3B = 0;
+        this.diceCount.black_reroll_3B_2B = 0;
         this.fixedDefenseAbility = {
             block: 0,
             evade: 0
@@ -88,7 +90,7 @@ export class AttackCalc {
         let possibleRolls = new PossibleRolls();
         possibleRolls.applyAllRolls(this.diceCount);
 
-        //possibleRolls.showProb();
+        possibleRolls.showProb();
 
         let damageResults = possibleRolls.getEffectiveDamage(this.surgeAbilities, this.fixedAttackAbility, this.fixedDefenseAbility, this.range);
         this.probabilityChart.addChartData(damageResults);
