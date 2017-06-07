@@ -1,5 +1,5 @@
 ﻿import 'jquery';
-import {attach as attachFastClick} from 'fastclick';
+import {FastClick} from 'fastclick';
 
 export class App {
     public router: any;
@@ -16,6 +16,6 @@ export class App {
     }
 
     attached() {
-        attachFastClick(document.body);
+        FastClick.attach(document.body);
     }
 }
