@@ -53,10 +53,10 @@ var PossibleRolls = (function () {
                 new RollResult_1.RollResult(0, 0, 0, 0, 1, false, (1 / 6) + ((1 / 6) * (1 / 6)))
             ],
             black_reroll_3B_2B: [
-                new RollResult_1.RollResult(0, 0, 0, 1, 0, false, (2 / 6) + ((1 / 2) * (2 / 6))),
-                new RollResult_1.RollResult(0, 0, 0, 2, 0, false, ((1 / 2) * (2 / 6))),
-                new RollResult_1.RollResult(0, 0, 0, 3, 0, false, ((1 / 2) * (1 / 6))),
-                new RollResult_1.RollResult(0, 0, 0, 0, 1, false, (1 / 6) + ((1 / 2) * (1 / 6)))
+                new RollResult_1.RollResult(0, 0, 0, 1, 0, false, (2 / 6) + ((3 / 6) * (2 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 2, 0, false, ((3 / 6) * (2 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 3, 0, false, ((3 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 0, 1, false, (1 / 6) + ((3 / 6) * (1 / 6)))
             ],
             white_reroll_D: [
                 new RollResult_1.RollResult(0, 0, 0, 0, 0, false, (1 / 6) + ((1 / 6) * (1 / 6))),
@@ -66,11 +66,95 @@ var PossibleRolls = (function () {
                 new RollResult_1.RollResult(0, 0, 0, 0, 0, true, ((1 / 6) * (1 / 6)))
             ],
             white_reroll_D_1B1E: [
-                new RollResult_1.RollResult(0, 0, 0, 0, 0, false, (1 / 6) + ((1 / 2) * (1 / 6))),
-                new RollResult_1.RollResult(0, 0, 0, 1, 0, false, (1 / 6) + ((1 / 2) * (1 / 6))),
-                new RollResult_1.RollResult(0, 0, 0, 0, 1, false, (1 / 6) + ((1 / 2) * (1 / 6))),
-                new RollResult_1.RollResult(0, 0, 0, 1, 1, false, 0 + ((1 / 2) * (2 / 6))),
-                new RollResult_1.RollResult(0, 0, 0, 0, 0, true, 0 + ((1 / 2) * (1 / 6)))
+                new RollResult_1.RollResult(0, 0, 0, 0, 0, false, (1 / 6) + ((3 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 1, 0, false, (1 / 6) + ((3 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 0, 1, false, (1 / 6) + ((3 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 1, 1, false, ((3 / 6) * (2 / 6))),
+                new RollResult_1.RollResult(0, 0, 0, 0, 0, true, ((3 / 6) * (1 / 6)))
+            ],
+            red_reroll_1D: [
+                new RollResult_1.RollResult(1, 0, 0, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 0, 0, 0, false, (2 / 6) + ((1 / 6) * (2 / 6))),
+                new RollResult_1.RollResult(2, 1, 0, 0, 0, false, (1 / 6) + ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(3, 0, 0, 0, 0, false, (2 / 6) + ((1 / 6) * (2 / 6)))
+            ],
+            red_reroll_1D_2D: [
+                new RollResult_1.RollResult(1, 0, 0, 0, 0, false, ((3 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 0, 0, 0, false, ((3 / 6) * (2 / 6))),
+                new RollResult_1.RollResult(2, 1, 0, 0, 0, false, (1 / 6) + ((3 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(3, 0, 0, 0, 0, false, (2 / 6) + ((3 / 6) * (2 / 6)))
+            ],
+            blue_reroll_2A: [
+                new RollResult_1.RollResult(1, 0, 2, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(0, 1, 2, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 3, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 1, 3, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 4, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 0, 5, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6)))
+            ],
+            blue_reroll_0D: [
+                new RollResult_1.RollResult(1, 0, 2, 0, 0, false, (1 / 6) + ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(0, 1, 2, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 3, 0, 0, false, (1 / 6) + ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 1, 3, 0, 0, false, (1 / 6) + ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 4, 0, 0, false, (1 / 6) + ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 0, 5, 0, 0, false, (1 / 6) + ((1 / 6) * (1 / 6)))
+            ],
+            blue_reroll_0S: [
+                new RollResult_1.RollResult(1, 0, 2, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(0, 1, 2, 0, 0, false, (1 / 6) + ((4 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 3, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 1, 3, 0, 0, false, (1 / 6) + ((4 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 4, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 0, 5, 0, 0, false, ((1 / 6) * (1 / 6)))
+            ],
+            green_reroll_0S: [
+                new RollResult_1.RollResult(0, 1, 1, 0, 0, false, (1 / 6) + ((3 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 1, 1, 0, 0, false, (1 / 6) + ((3 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 1, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 2, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 1, 2, 0, 0, false, (1 / 6) + ((3 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 3, 0, 0, false, ((1 / 6) * (1 / 6)))
+            ],
+            green_reroll_0D_1D: [
+                new RollResult_1.RollResult(0, 1, 1, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 1, 1, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 1, 0, 0, false, (1 / 6) + ((3 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 2, 0, 0, false, (1 / 6) + ((3 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 1, 2, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 3, 0, 0, false, (1 / 6) + ((3 / 6) * (1 / 6)))
+            ],
+            green_reroll_1A: [
+                new RollResult_1.RollResult(0, 1, 1, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 1, 1, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 1, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 2, 0, 0, false, (1 / 6) + ((3 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 1, 2, 0, 0, false, (1 / 6) + ((3 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 3, 0, 0, false, (1 / 6) + ((3 / 6) * (1 / 6)))
+            ],
+            yellow_reroll_0S: [
+                new RollResult_1.RollResult(0, 1, 0, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 2, 0, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 1, 1, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 1, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(0, 1, 2, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 0, 2, 0, 0, false, ((1 / 6) * (1 / 6)))
+            ],
+            yellow_reroll_0D: [
+                new RollResult_1.RollResult(0, 1, 0, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 2, 0, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 1, 1, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 1, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(0, 1, 2, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 0, 2, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6)))
+            ],
+            yellow_reroll_0A: [
+                new RollResult_1.RollResult(0, 1, 0, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 2, 0, 0, 0, false, ((1 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 1, 1, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(2, 0, 1, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(0, 1, 2, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6))),
+                new RollResult_1.RollResult(1, 0, 2, 0, 0, false, (1 / 6) + ((2 / 6) * (1 / 6)))
             ]
         };
         this._possibleRolls = {};
