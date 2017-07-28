@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 require("bootstrap");
 require("bootstrap/css/bootstrap.css!");
 var PossibleRolls_1 = require("../util/PossibleRolls");
@@ -73,4 +74,3 @@ var AttackRangeCalc = (function () {
     return AttackRangeCalc;
 }());
 exports.AttackRangeCalc = AttackRangeCalc;
-//# sourceMappingURL=attack-range.js.map

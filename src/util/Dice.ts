@@ -20,5 +20,4 @@
     yellow_reroll_0S: T;
     yellow_reroll_0D: T;
     yellow_reroll_0A: T;
-
 }

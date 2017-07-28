@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 require("jquery");
 var fastclick_1 = require("fastclick");
 var App = (function () {
@@ -14,9 +15,8 @@ var App = (function () {
         this.router = router;
     };
     App.prototype.attached = function () {
-        fastclick_1.attach(document.body);
+        fastclick_1.FastClick.attach(document.body);
     };
     return App;
 }());
 exports.App = App;
-//# sourceMappingURL=app.js.map

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var RollResult_1 = require("./RollResult");
 var PossibleRolls = (function () {
     function PossibleRolls() {
@@ -281,4 +282,3 @@ var PossibleRolls = (function () {
     return PossibleRolls;
 }());
 exports.PossibleRolls = PossibleRolls;
-//# sourceMappingURL=PossibleRolls.js.map

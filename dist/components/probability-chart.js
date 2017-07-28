@@ -11,9 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 require("jquery");
+require("chartjs");
 var ProbabilityChart = (function () {
     function ProbabilityChart(element) {
         this._maxDatasets = 8;
@@ -59,11 +61,14 @@ var ProbabilityChart = (function () {
         this._datasets.pop();
         this._rawChartData.pop();
         this.legend.pop();
-        if (this.legend.length > 1) {
-            this.combineIcons.unshift(this.legend[this.legend.length - 2]);
-        }
-        this.combineIcons.pop();
+        this.setCombineIcons();
         this._currentColor--;
+    };
+    ProbabilityChart.prototype.setCombineIcons = function () {
+        if (this.legend.length > 1) {
+            this.combineIcon1 = this.legend[this.legend.length - 2];
+            this.combineIcon2 = this.legend[this.legend.length - 1];
+        }
     };
     ProbabilityChart.prototype.resetChart = function () {
         this._chartMaxDamage = 0;
@@ -71,7 +76,6 @@ var ProbabilityChart = (function () {
         this._datasets = [];
         this._rawChartData = [];
         this.legend = [];
-        this.combineIcons = [];
         this.setChartDisplay(false);
         if (this._chart !== undefined) {
             this._chart.destroy();
@@ -144,10 +148,7 @@ var ProbabilityChart = (function () {
             textColor: this.getTextColor()
         };
         this.legend.push(newLegendIcon);
-        this.combineIcons.push(newLegendIcon);
-        if (this.combineIcons.length > 2) {
-            this.combineIcons.shift();
-        }
+        this.setCombineIcons();
         this._currentColor++;
         if (this._chart !== undefined) {
             this._chart.destroy();
@@ -175,4 +176,3 @@ var LegendInfo = (function () {
     return LegendInfo;
 }());
 exports.LegendInfo = LegendInfo;
-//# sourceMappingURL=probability-chart.js.map

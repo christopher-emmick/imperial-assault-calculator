@@ -13,11 +13,13 @@ import { Config } from "../util/Config";
 import { SaveDialog, SaveOptions } from "../components/save-dialog";
 import { ConfigStorage } from "../util/ConfigStorage";
 import { AttackType } from "../util/AttackType";
+import { RerollOption, Rerolls } from "../util/Rerolls";
 
 export class AttackCalc {
     private _dialogService: DialogService;
 
     diceCount: Dice<number>;
+    rerollOptions: Rerolls;
 
     surgeAbilities: SurgeAttackProperty[];
     fixedAttackAbility: FixedAttackProperty;
@@ -32,7 +34,7 @@ export class AttackCalc {
         this.diceCount = new Dice<number>();
         this.resetAttackDice();
         this.resetDefenseDice();
-
+        this.rerollOptions = new Rerolls();
         this.surgeAbilities = [];
         this.selectAttackType('melee');
 
@@ -61,6 +63,14 @@ export class AttackCalc {
         this.diceCount[type]++;
     }
 
+    addNewRerollOption(type: string) {
+        this.rerollOptions.addOption(type);
+    }
+
+    removeRerollOption(option: RerollOption) {
+        this.rerollOptions.removeOption(option);
+    }
+
     addDefenseProperty(type: string) {
         this.fixedDefenseAbility[type]++;
     }
@@ -78,16 +88,6 @@ export class AttackCalc {
     }
 
     resetDefenseDice() {
-<<<<<<< HEAD
-        this.diceCount.black = 0;
-        this.diceCount.white = 0;
-        this.diceCount.black_reroll_3B = 0;
-        this.diceCount.black_reroll_3B_2B = 0;
-        this.fixedDefenseAbility = {
-            block: 0,
-            evade: 0
-        };
-=======
         this.loadDefenseDice(new Config())
     }
 
@@ -97,12 +97,30 @@ export class AttackCalc {
         this.diceCount.green = config.diceCount.green;
         this.diceCount.yellow = config.diceCount.yellow;
         this.fixedAttackAbility = config.fixedAttackAbility;
+
+        this.diceCount.red_reroll_1D = config.diceCount.red_reroll_1D;
+        this.diceCount.red_reroll_1D_2D = config.diceCount.red_reroll_1D_2D;
+        this.diceCount.blue_reroll_2A = config.diceCount.blue_reroll_2A;
+        this.diceCount.blue_reroll_0D = config.diceCount.blue_reroll_0D;
+        this.diceCount.blue_reroll_0S = config.diceCount.blue_reroll_0S;
+        this.diceCount.green_reroll_0D_1D = config.diceCount.green_reroll_0D_1D;
+        this.diceCount.green_reroll_0S = config.diceCount.green_reroll_0S;
+        this.diceCount.green_reroll_1A = config.diceCount.green_reroll_1A;
+        this.diceCount.yellow_reroll_0A = config.diceCount.yellow_reroll_0A;
+        this.diceCount.yellow_reroll_0D = config.diceCount.yellow_reroll_0D;
+        this.diceCount.yellow_reroll_0S = config.diceCount.yellow_reroll_0S;
     }
 
     private loadDefenseDice(config: Config) {
         this.diceCount.black = config.diceCount.black;
         this.diceCount.white = config.diceCount.white;
         this.fixedDefenseAbility = config.fixedDefenseAbility;
+        
+        this.diceCount.black_reroll_3B = config.diceCount.black_reroll_3B;
+        this.diceCount.black_reroll_3B_2B = config.diceCount.black_reroll_3B_2B;
+        this.diceCount.white_reroll_D = config.diceCount.white_reroll_D;
+        this.diceCount.white_reroll_D_1B1E = config.diceCount.white_reroll_D_1B1E;
+
     }
 
     private loadConfig(config: Config) {
@@ -135,7 +153,6 @@ export class AttackCalc {
         config.hasDefenseConfig = saveOptions.includeDefense;
 
         ConfigStorage.saveConfig(config.name, config);
->>>>>>> bec9d60746a92c2b8140b095412f1eb429b3ca30
     }
 
     calculateResult() {
@@ -166,6 +183,10 @@ export class AttackCalc {
                     this.saveConfig(response.output);
                 }
             });
+    }
+
+    applyRerolls() {
+
     }
 }
 

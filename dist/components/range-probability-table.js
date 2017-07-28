@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var RangeTableCalc = (function () {
     function RangeTableCalc() {
         this.fullRangeResults = [];
@@ -9,4 +10,3 @@ var RangeTableCalc = (function () {
     return RangeTableCalc;
 }());
 exports.RangeTableCalc = RangeTableCalc;
-//# sourceMappingURL=range-probability-table.js.map
