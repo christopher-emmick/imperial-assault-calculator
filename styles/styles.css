@@ -176,7 +176,7 @@ section {
     height: 20px;
     margin-top: -3px;
 }
-.img-icon-dodge {
+.img-icon-dodge, .img-icon-evade {
     height: 20px;
     margin-top: -3px;
 }
@@ -210,6 +210,12 @@ section {
 .add-surge-button-row {
     margin: 10px 0px 0px 0px;
     text-align: left;
+}
+
+.reroll-option-span {
+    margin-top: 10px;
+    display: inline-block;
+    font-size: 16px;
 }
 
 .calculate-button-row {

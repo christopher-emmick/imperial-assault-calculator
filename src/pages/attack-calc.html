@@ -1,5 +1,6 @@
 <template>
     <require from='../components/probability-chart'></require>
+    <require from="../components/die-to-options"></require>
 
     <div class="main-container">
         <div class="row attack-type-row">
@@ -187,27 +188,43 @@
                 </button>
             </span>
         </div>
-        <div class="row add-surge-button-row">
-            <div class="col-xs-6 surge-ability-button-col">
-                <button class="btn btn-default surge-button"
-                        data-toggle="tooltip"
-                        title="Add Attacker Reroll Option"
-                        click.delegate="addNewRerollOption('attack')">
-                    Add Attacker Reroll Option
-                </button>
-                <button class="btn btn-default surge-button"
-                        data-toggle="tooltip"
-                        title="Add Defender Reroll Option"
-                        click.delegate="addNewRerollOption('defense')">
-                    Add Defender Reroll Option
-                </button>
+        <div class="row dice-button-row" show.bind="showRerolls">
+            <div class="col-xs-3 col-xs-offset-1">
+                <span class="surge-ability-span">
+                    <button class="btn btn-default surge-button"
+                            data-toggle="tooltip"
+                            title="Add Reroll Option"
+                            click.delegate="addNewRerollOption()">
+                        Add Reroll Option
+                    </button>
+                </span>
             </div>
         </div>
-        <div class="row dice-button-row" repeat.for="option of rerollOptions.selected">
-            <span class="surge-ability-span">
+        <div class="row dice-button-row" repeat.for="option of rerollOptions.selected" show.bind="showRerolls">
+            <span class="reroll-option-span">
+                <div class="col-xs-10 surge-ability-button-col">
+                    <select value.bind="option.replace">
+                        <option value="">Select a Die</option>
+                        <option repeat.for="die of rerollOptions.rerollable_dice" model.bind="die.value">${die.name}</option>
+                    </select>
+                </div>
+                <div class="col-xs-2 surge-ability-button-col">
+                    <button class="btn btn-default button-cancel"
+                            data-toggle="tooltip"
+                            title="Remove Reroll"
+                            click.delegate="removeRerollOption(option)">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <div class="col-xs-12 surge-ability-button-col">
+                    <div class="row" repeat.for="choice of rerollOptions.allRerollOptions.options[option.replace]">
+                        <div class="col-xs-12">
+                            <label><input type="radio" name="rerollRadio-${option.id}" model.bind="option.die" checked.bind="choice.die" click.delegate="rerollChoice(option, choice.die)">&nbsp;<div style="display: inline-block;" innerhtml.bind="choice.label"></div>
+                        </div>
+                    </div>
+                </div>
             </span>
         </div>
-
         <div class="row calculate-button-row">
             <span class="dice-button-span">
                 <button class="btn btn-default calculate-button" click.delegate="calculateResult()">CALCULATE</button>

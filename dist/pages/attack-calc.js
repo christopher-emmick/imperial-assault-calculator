@@ -29,12 +29,13 @@ var Rerolls_1 = require("../util/Rerolls");
 var AttackCalc = (function () {
     function AttackCalc(dialogService) {
         this.diceCount = new Dice_1.Dice();
+        this.rerollOptions = new Rerolls_1.Rerolls();
         this.resetAttackDice();
         this.resetDefenseDice();
-        this.rerollOptions = new Rerolls_1.Rerolls();
         this.surgeAbilities = [];
         this.selectAttackType('melee');
         this._dialogService = dialogService;
+        this.showRerolls = false;
     }
     AttackCalc.prototype.attached = function () {
         $('[data-toggle="tooltip"]').tooltip({ container: "body", delay: { show: 500 } });
@@ -54,9 +55,22 @@ var AttackCalc = (function () {
     };
     AttackCalc.prototype.addDie = function (type) {
         this.diceCount[type]++;
+        this.showRerolls = true;
     };
-    AttackCalc.prototype.addNewRerollOption = function (type) {
-        this.rerollOptions.addOption(type);
+    AttackCalc.prototype.addNewRerollOption = function () {
+        this.rerollOptions.addNewOption();
+    };
+    AttackCalc.prototype.hasDie = function (type) {
+        if (typeof this.diceCount[type] != "undefined" && this.diceCount[type] > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    AttackCalc.prototype.hasAnyDie = function () {
+        return this.hasDie('red') || this.hasDie('green') || this.hasDie('blue') || this.hasDie('yellow')
+            || this.hasDie('black') || this.hasDie('white');
     };
     AttackCalc.prototype.removeRerollOption = function (option) {
         this.rerollOptions.removeOption(option);
@@ -72,9 +86,18 @@ var AttackCalc = (function () {
     };
     AttackCalc.prototype.resetAttackDice = function () {
         this.loadAttackDice(new Config_1.Config());
+        this.showRerolls = this.hasAnyDie();
+        console.log(this.showRerolls);
+        if (!this.showRerolls) {
+            this.rerollOptions.resetRerolls();
+        }
     };
     AttackCalc.prototype.resetDefenseDice = function () {
         this.loadDefenseDice(new Config_1.Config());
+        this.showRerolls = this.hasAnyDie();
+        if (!this.showRerolls) {
+            this.rerollOptions.resetRerolls();
+        }
     };
     AttackCalc.prototype.loadAttackDice = function (config) {
         this.diceCount.red = config.diceCount.red;
@@ -129,8 +152,12 @@ var AttackCalc = (function () {
         ConfigStorage_1.ConfigStorage.saveConfig(config.name, config);
     };
     AttackCalc.prototype.calculateResult = function () {
+        var selectedDice = this.diceCount;
+        if (this.showRerolls) {
+            this.applyRerolls(selectedDice);
+        }
         var possibleRolls = new PossibleRolls_1.PossibleRolls();
-        possibleRolls.applyAllRolls(this.diceCount);
+        possibleRolls.applyAllRolls(selectedDice);
         possibleRolls.showProb();
         var damageResults = possibleRolls.getEffectiveDamage(this.surgeAbilities, this.fixedAttackAbility, this.fixedDefenseAbility, this.range);
         this.probabilityChart.addChartData(damageResults);
@@ -155,7 +182,15 @@ var AttackCalc = (function () {
             }
         });
     };
-    AttackCalc.prototype.applyRerolls = function () {
+    AttackCalc.prototype.applyRerolls = function (dice) {
+        for (var _i = 0, _a = this.rerollOptions.selected; _i < _a.length; _i++) {
+            var option = _a[_i];
+            console.log(option);
+        }
+    };
+    AttackCalc.prototype.rerollChoice = function (option, die) {
+        option.die = die;
+        return true;
     };
     return AttackCalc;
 }());

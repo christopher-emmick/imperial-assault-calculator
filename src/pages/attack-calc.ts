@@ -17,7 +17,6 @@ import { RerollOption, Rerolls } from "../util/Rerolls";
 
 export class AttackCalc {
     private _dialogService: DialogService;
-
     diceCount: Dice<number>;
     rerollOptions: Rerolls;
 
@@ -27,18 +26,19 @@ export class AttackCalc {
     attackType: AttackType;
     attackTypeString: string;
     range: number;
+    showRerolls: boolean;
 
     probabilityChart: ProbabilityChart;
 
     constructor( @inject dialogService: DialogService) {
         this.diceCount = new Dice<number>();
+        this.rerollOptions = new Rerolls();
         this.resetAttackDice();
         this.resetDefenseDice();
-        this.rerollOptions = new Rerolls();
         this.surgeAbilities = [];
         this.selectAttackType('melee');
-
         this._dialogService = dialogService;
+        this.showRerolls = false;
     }
 
     attached() {
@@ -61,10 +61,25 @@ export class AttackCalc {
 
     addDie(type: string) {
         this.diceCount[type]++;
+        this.showRerolls = true;
     }
 
-    addNewRerollOption(type: string) {
-        this.rerollOptions.addOption(type);
+    addNewRerollOption() {
+        this.rerollOptions.addNewOption();
+    }
+
+    hasDie(type: string) {
+        if (typeof this.diceCount[type] != "undefined" && this.diceCount[type] > 0) {
+             return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    hasAnyDie() {
+        return this.hasDie('red') || this.hasDie('green') || this.hasDie('blue') || this.hasDie('yellow')
+            || this.hasDie('black') || this.hasDie('white');
     }
 
     removeRerollOption(option: RerollOption) {
@@ -85,10 +100,20 @@ export class AttackCalc {
 
     resetAttackDice() {
         this.loadAttackDice(new Config())
+        this.showRerolls = this.hasAnyDie();
+        console.log(this.showRerolls);
+        if (!this.showRerolls) {
+            this.rerollOptions.resetRerolls();
+        }
     }
 
     resetDefenseDice() {
         this.loadDefenseDice(new Config())
+        this.showRerolls = this.hasAnyDie();
+        if (!this.showRerolls) {
+
+            this.rerollOptions.resetRerolls();
+        }
     }
 
     private loadAttackDice(config: Config) {
@@ -156,8 +181,13 @@ export class AttackCalc {
     }
 
     calculateResult() {
+        let selectedDice = this.diceCount;
+
+        if (this.showRerolls) {
+            this.applyRerolls(selectedDice);
+        }
         let possibleRolls = new PossibleRolls();
-        possibleRolls.applyAllRolls(this.diceCount);
+        possibleRolls.applyAllRolls(selectedDice);
 
         possibleRolls.showProb();
 
@@ -185,7 +215,18 @@ export class AttackCalc {
             });
     }
 
-    applyRerolls() {
+    applyRerolls(dice: Dice<number>) {
+
+        for (let option of this.rerollOptions.selected) {
+            console.log(option);
+        }
+
+    }
+
+    rerollChoice(option: RerollOption, die: string) {
+
+        option.die = die;
+        return true;
 
     }
 }
