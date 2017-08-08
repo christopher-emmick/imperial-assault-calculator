@@ -1,44 +1,22 @@
 <template>
-    <require from='../components/probability-chart'></require>
-    <require from="../components/die-to-options"></require>
-
     <div class="main-container">
         <div class="row attack-type-row">
-            <div class="col-xs-4 attack-type-button-col">
-                <button class="btn btn-default attack-type-button ${(attackTypeString == 'melee') ? 'attack-type-selected' : ''}"
-                        data-toggle="tooltip"
-                        title="Melee Attack"
-                        click.delegate="selectAttackType('melee')">
-                    <img class="img-icon" src="images/melee.png" />
-                </button>
-            </div>
-            <div class="col-xs-4 attack-type-button-col">
-                <button class="btn btn-default attack-type-button attack-type-button-range ${(attackTypeString == 'range') ? 'attack-type-selected' : ''}"
-                        data-toggle="tooltip"
-                        title="Ranged Attack"
-                        click.delegate="selectAttackType('range')">
-                    ${range}
-                    <img class="img-icon" src="images/ranged.png" />
-                </button>
-            </div>
-            <div class="col-xs-4 attack-type-button-col">
-                <button class="btn btn-default dropdown-toggle option-button" type="button" id="save-load-menu" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-option-horizontal"/>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-right save-load-menu" role="menu" aria-labelledby="save-load-menu">
-                    <li role="presentation">                        
-                        <a role="menuitem" tabindex="-1" click.delegate="save()">
-                            <i class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></i>Save
-                        </a>
-                    </li>
-                    <li role="presentation">                        
-                        <a role="menuitem" tabindex="-1" click.delegate="load()">
-                            <i class="glyphicon glyphicon-folder-open" aria-hidden="true"></i>Load
-                        </a>
-                    </li>
-                </ul>
+            <div class="col-xs-12 attack-type-button-col">
+                <h4>Select a range of Accuracy below from 0 to 12.</h4>
             </div>
         </div>
+        <div class="row attack-type-row">
+            <div class="col-xs-6 attack-type-button-col">
+                <label for="rangeStart">Minimum Range</label>
+                <input id = "rangeStart" type = "text" value.two-way = "rangeStart" change.delegate="checkRange('start')">
+            </div>
+            <div class="col-xs-6 attack-type-button-col">
+                <label for="rangeEnd">Maximum Range</label>
+                <input id = "rangeEnd" type = "text" value.two-way = "rangeEnd" change.delegate="checkRange('end')">
+
+            </div>
+        </div>
+
         <div class="row dice-button-row">
             <span class="dice-button-span">
                 <button class="btn dice-button dice-button-red dice-button-dark" 
@@ -188,43 +166,6 @@
                 </button>
             </span>
         </div>
-        <div class="row dice-button-row" show.bind="showRerolls">
-            <div class="col-xs-3 col-xs-offset-1">
-                <span class="surge-ability-span">
-                    <button class="btn btn-default surge-button"
-                            data-toggle="tooltip"
-                            title="Add Reroll Option"
-                            click.delegate="addNewRerollOption()">
-                        Add Reroll Option
-                    </button>
-                </span>
-            </div>
-        </div>
-        <div class="row dice-button-row" repeat.for="option of rerollOptions.selected" show.bind="showRerolls">
-            <span class="reroll-option-span">
-                <div class="col-xs-10 surge-ability-button-col">
-                    <select value.bind="option.replace">
-                        <option value="">Select a Die</option>
-                        <option repeat.for="die of rerollOptions.rerollable_dice" model.bind="die.value">${die.name}</option>
-                    </select>
-                </div>
-                <div class="col-xs-2 surge-ability-button-col">
-                    <button class="btn btn-default button-cancel"
-                            data-toggle="tooltip"
-                            title="Remove Reroll"
-                            click.delegate="removeRerollOption(option)">
-                        <span class="fa fa-times"></span>
-                    </button>
-                </div>
-                <div class="col-xs-12 surge-ability-button-col">
-                    <div class="row" repeat.for="choice of rerollOptions.allRerollOptions.options[option.replace]">
-                        <div class="col-xs-12">
-                            <label><input type="radio" name="rerollRadio-${option.id}" model.bind="option.die" checked.bind="choice.die" click.delegate="rerollChoice(option, choice.die)">&nbsp;<div style="display: inline-block;" innerhtml.bind="choice.label"></div>
-                        </div>
-                    </div>
-                </div>
-            </span>
-        </div>
         <div class="row calculate-button-row">
             <span class="dice-button-span">
                 <button class="btn btn-default calculate-button" click.delegate="calculateResult()">CALCULATE</button>
@@ -236,6 +177,5 @@
                 </button>
             </span>
         </div>
-        <probability-chart title="% Chance to do at least X Damage" x-label="Total damage" probability-chart.ref="probabilityChart"/>
     </div>
 </template>

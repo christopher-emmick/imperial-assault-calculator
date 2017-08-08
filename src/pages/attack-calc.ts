@@ -13,11 +13,12 @@ import { Config } from "../util/Config";
 import { SaveDialog, SaveOptions } from "../components/save-dialog";
 import { ConfigStorage } from "../util/ConfigStorage";
 import { AttackType } from "../util/AttackType";
+import { RerollOption, Rerolls } from "../util/Rerolls";
 
 export class AttackCalc {
     private _dialogService: DialogService;
-
     diceCount: Dice<number>;
+    rerollOptions: Rerolls;
 
     surgeAbilities: SurgeAttackProperty[];
     fixedAttackAbility: FixedAttackProperty;
@@ -25,18 +26,19 @@ export class AttackCalc {
     attackType: AttackType;
     attackTypeString: string;
     range: number;
+    showRerolls: boolean;
 
     probabilityChart: ProbabilityChart;
 
     constructor( @inject dialogService: DialogService) {
         this.diceCount = new Dice<number>();
+        this.rerollOptions = new Rerolls();
         this.resetAttackDice();
         this.resetDefenseDice();
-
         this.surgeAbilities = [];
         this.selectAttackType('melee');
-
         this._dialogService = dialogService;
+        this.showRerolls = false;
     }
 
     attached() {
@@ -59,6 +61,29 @@ export class AttackCalc {
 
     addDie(type: string) {
         this.diceCount[type]++;
+        this.showRerolls = true;
+    }
+
+    addNewRerollOption() {
+        this.rerollOptions.addNewOption();
+    }
+
+    hasDie(type: string) {
+        if (typeof this.diceCount[type] != "undefined" && this.diceCount[type] > 0) {
+             return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    hasAnyDie() {
+        return this.hasDie('red') || this.hasDie('green') || this.hasDie('blue') || this.hasDie('yellow')
+            || this.hasDie('black') || this.hasDie('white');
+    }
+
+    removeRerollOption(option: RerollOption) {
+        this.rerollOptions.removeOption(option);
     }
 
     addDefenseProperty(type: string) {
@@ -75,10 +100,19 @@ export class AttackCalc {
 
     resetAttackDice() {
         this.loadAttackDice(new Config())
+        this.showRerolls = this.hasAnyDie();
+        if (!this.showRerolls) {
+            this.rerollOptions.resetRerolls();
+        }
     }
 
     resetDefenseDice() {
         this.loadDefenseDice(new Config())
+        this.showRerolls = this.hasAnyDie();
+        if (!this.showRerolls) {
+
+            this.rerollOptions.resetRerolls();
+        }
     }
 
     private loadAttackDice(config: Config) {
@@ -87,12 +121,30 @@ export class AttackCalc {
         this.diceCount.green = config.diceCount.green;
         this.diceCount.yellow = config.diceCount.yellow;
         this.fixedAttackAbility = config.fixedAttackAbility;
+
+        this.diceCount.red_reroll_1D = config.diceCount.red_reroll_1D;
+        this.diceCount.red_reroll_1D_2D = config.diceCount.red_reroll_1D_2D;
+        this.diceCount.blue_reroll_2A = config.diceCount.blue_reroll_2A;
+        this.diceCount.blue_reroll_0D = config.diceCount.blue_reroll_0D;
+        this.diceCount.blue_reroll_0S = config.diceCount.blue_reroll_0S;
+        this.diceCount.green_reroll_0D_1D = config.diceCount.green_reroll_0D_1D;
+        this.diceCount.green_reroll_0S = config.diceCount.green_reroll_0S;
+        this.diceCount.green_reroll_1A = config.diceCount.green_reroll_1A;
+        this.diceCount.yellow_reroll_0A = config.diceCount.yellow_reroll_0A;
+        this.diceCount.yellow_reroll_0D = config.diceCount.yellow_reroll_0D;
+        this.diceCount.yellow_reroll_0S = config.diceCount.yellow_reroll_0S;
     }
 
     private loadDefenseDice(config: Config) {
         this.diceCount.black = config.diceCount.black;
         this.diceCount.white = config.diceCount.white;
         this.fixedDefenseAbility = config.fixedDefenseAbility;
+        
+        this.diceCount.black_reroll_3B = config.diceCount.black_reroll_3B;
+        this.diceCount.black_reroll_3B_2B = config.diceCount.black_reroll_3B_2B;
+        this.diceCount.white_reroll_D = config.diceCount.white_reroll_D;
+        this.diceCount.white_reroll_D_1B1E = config.diceCount.white_reroll_D_1B1E;
+
     }
 
     private loadConfig(config: Config) {
@@ -128,10 +180,16 @@ export class AttackCalc {
     }
 
     calculateResult() {
-        let possibleRolls = new PossibleRolls();
-        possibleRolls.applyAllRolls(this.diceCount);
 
-        //possibleRolls.showProb();
+        let selectedDice = $.extend(true, {}, this.diceCount);
+
+        if (this.rerollOptions.selected.length > 0) {
+            this.applyRerolls(selectedDice);
+        }
+        let possibleRolls = new PossibleRolls();
+        possibleRolls.applyAllRolls(selectedDice);
+
+        possibleRolls.showProb();
 
         let damageResults = possibleRolls.getEffectiveDamage(this.surgeAbilities, this.fixedAttackAbility, this.fixedDefenseAbility, this.range);
         this.probabilityChart.addChartData(damageResults);
@@ -155,6 +213,24 @@ export class AttackCalc {
                     this.saveConfig(response.output);
                 }
             });
+    }
+
+    applyRerolls(dice: Dice<number>) {
+
+        for (let option of this.rerollOptions.selected) {
+            if (dice[option.replace] > 0 && option.die !== null) {
+                dice[option.replace]--;
+                dice[option.die]++;
+            }
+        }
+
+    }
+
+    rerollChoice(option: RerollOption, die: string) {
+
+        option.die = die;
+        return true;
+
     }
 }
 
