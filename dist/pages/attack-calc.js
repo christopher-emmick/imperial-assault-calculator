@@ -87,7 +87,6 @@ var AttackCalc = (function () {
     AttackCalc.prototype.resetAttackDice = function () {
         this.loadAttackDice(new Config_1.Config());
         this.showRerolls = this.hasAnyDie();
-        console.log(this.showRerolls);
         if (!this.showRerolls) {
             this.rerollOptions.resetRerolls();
         }
@@ -152,8 +151,8 @@ var AttackCalc = (function () {
         ConfigStorage_1.ConfigStorage.saveConfig(config.name, config);
     };
     AttackCalc.prototype.calculateResult = function () {
-        var selectedDice = this.diceCount;
-        if (this.showRerolls) {
+        var selectedDice = $.extend(true, {}, this.diceCount);
+        if (this.rerollOptions.selected.length > 0) {
             this.applyRerolls(selectedDice);
         }
         var possibleRolls = new PossibleRolls_1.PossibleRolls();
@@ -185,7 +184,10 @@ var AttackCalc = (function () {
     AttackCalc.prototype.applyRerolls = function (dice) {
         for (var _i = 0, _a = this.rerollOptions.selected; _i < _a.length; _i++) {
             var option = _a[_i];
-            console.log(option);
+            if (dice[option.replace] > 0 && option.die !== null) {
+                dice[option.replace]--;
+                dice[option.die]++;
+            }
         }
     };
     AttackCalc.prototype.rerollChoice = function (option, die) {

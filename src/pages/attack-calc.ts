@@ -101,7 +101,6 @@ export class AttackCalc {
     resetAttackDice() {
         this.loadAttackDice(new Config())
         this.showRerolls = this.hasAnyDie();
-        console.log(this.showRerolls);
         if (!this.showRerolls) {
             this.rerollOptions.resetRerolls();
         }
@@ -181,9 +180,10 @@ export class AttackCalc {
     }
 
     calculateResult() {
-        let selectedDice = this.diceCount;
 
-        if (this.showRerolls) {
+        let selectedDice = $.extend(true, {}, this.diceCount);
+
+        if (this.rerollOptions.selected.length > 0) {
             this.applyRerolls(selectedDice);
         }
         let possibleRolls = new PossibleRolls();
@@ -218,7 +218,10 @@ export class AttackCalc {
     applyRerolls(dice: Dice<number>) {
 
         for (let option of this.rerollOptions.selected) {
-            console.log(option);
+            if (dice[option.replace] > 0 && option.die !== null) {
+                dice[option.replace]--;
+                dice[option.die]++;
+            }
         }
 
     }
