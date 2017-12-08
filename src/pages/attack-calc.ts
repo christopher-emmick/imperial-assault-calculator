@@ -127,6 +127,7 @@ export class AttackCalc {
         this.diceCount.blue_reroll_2A = config.diceCount.blue_reroll_2A;
         this.diceCount.blue_reroll_0D = config.diceCount.blue_reroll_0D;
         this.diceCount.blue_reroll_0S = config.diceCount.blue_reroll_0S;
+        this.diceCount.green_reroll_0D = config.diceCount.green_reroll_0D;
         this.diceCount.green_reroll_0D_1D = config.diceCount.green_reroll_0D_1D;
         this.diceCount.green_reroll_0S = config.diceCount.green_reroll_0S;
         this.diceCount.green_reroll_1A = config.diceCount.green_reroll_1A;

@@ -15,6 +15,7 @@
     blue_reroll_0D: T;
     blue_reroll_0S: T;
     green_reroll_0S: T;
+    green_reroll_0D: T;
     green_reroll_0D_1D: T;
     green_reroll_1A: T;
     yellow_reroll_0S: T;

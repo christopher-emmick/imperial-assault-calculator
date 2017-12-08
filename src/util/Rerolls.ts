@@ -27,6 +27,7 @@ export class AllRerollOptions {
         green: [
             new RerollOption('attack', 'on 1 A', 'green_reroll_1A', 'green'),
             new RerollOption('attack', 'on 0 <img class="img-icon-surge" src="images/surge.png" />', 'green_reroll_0S', 'green'),
+            new RerollOption('attack', 'on 0 <img class="img-icon-damage" src="images/damage.png" />', 'green_reroll_0D', 'green'),
             new RerollOption('attack', 'on 0 or 1 <img class="img-icon-damage" src="images/damage.png" />', 'green_reroll_0D_1D', 'green')
         ],
         blue: [
