@@ -119,6 +119,14 @@ export class PossibleRolls {
             new RollResult(1, 1, 2, 0, 0, false, (1 / 6) + ((3 / 6) * (1 / 6))),
             new RollResult(2, 0, 3, 0, 0, false, ((1 / 6) * (3 / 6)))
         ],
+        green_reroll_0D: [
+            new RollResult(0, 1, 1, 0, 0, false, ((1 / 6) * (1 / 6))),
+            new RollResult(1, 1, 1, 0, 0, false, (1 / 6) + ((1 / 6) * (1 / 6))),
+            new RollResult(2, 0, 1, 0, 0, false, (1 / 6) + ((1 / 6) * (1 / 6))),
+            new RollResult(2, 0, 2, 0, 0, false, (1 / 6) + ((1 / 6) * (1 / 6))),
+            new RollResult(1, 1, 2, 0, 0, false,(1 / 6) + ((1 / 6) * (1 / 6))),
+            new RollResult(2, 0, 3, 0, 0, false, (1 / 6) + ((1 / 6) * (1 / 6)))
+        ],
         green_reroll_0D_1D: [
             new RollResult(0, 1, 1, 0, 0, false, ((1 / 6) * (3 / 6))),
             new RollResult(1, 1, 1, 0, 0, false, ((1 / 6) * (3 / 6))),
